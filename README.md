@@ -2,7 +2,7 @@
 
 Текстовая RPG для iOS. Игрок ходит по лабиринту, собирает предметы и ищет сокровище.
 
-![Screenshot](CrystalDragons/Screenshot/ScreenshotOfGame.png)
+![Screenshot](ScreenshotOfGame.png)
 
 ## Как играть
 
