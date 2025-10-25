@@ -127,21 +127,27 @@ struct ContentView: View {
     }
     
     private func getLineColor(_ line: String) -> Color {
-        if line.hasPrefix(">") {
+        if line.hasPrefix(">") || line.hasPrefix("===") {
             return .cyan
-        } else if line.contains("WIN") || line.contains("Victory") || line.contains("🎉") {
-            return .green
-        } else if line.contains("GAME OVER") || line.contains("died") || line.contains("💀") {
-            return .red
-        } else if line.contains("⚠️") || line.contains("evil") {
-            return .orange
-        } else if line.contains("Health:") || line.contains("Inventory:") {
-            return .yellow
-        } else if line.hasPrefix("===") {
-            return .cyan
-        } else {
-            return .white
         }
+        
+        if line.containsAny(of: ["WIN", "Victory", "🎉"]) {
+            return .green
+        }
+        
+        if line.containsAny(of: ["GAME OVER", "died", "💀"]) {
+            return .red
+        }
+        
+        if line.containsAny(of: ["⚠️", "evil"]) {
+            return .orange
+        }
+        
+        if line.containsAny(of: ["Health:", "Inventory:"]) {
+            return .yellow
+        }
+        
+        return .white
     }
 }
 
@@ -169,7 +175,12 @@ extension View {
             .foregroundColor(.black)
             .autocapitalization(.none)
             .disableAutocorrection(true)
+    }
+}
 
+extension String {
+    func containsAny(of strings: [String]) -> Bool {
+        strings.contains { self.contains($0) }
     }
 }
 
